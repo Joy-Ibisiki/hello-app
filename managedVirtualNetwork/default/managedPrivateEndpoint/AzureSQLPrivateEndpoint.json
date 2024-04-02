@@ -1,0 +1,10 @@
+{
+	"name": "AzureSQLPrivateEndpoint",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/281f4d2a-eed7-49bf-944b-412dd7543e88/resourceGroups/mcsazurelab-48bc344/providers/Microsoft.Sql/servers/db-server-48bc344",
+		"groupId": "sqlServer",
+		"fqdns": [
+			"db-server-48bc344.database.windows.net"
+		]
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"name": "Platform Mckinsey Keyvault 2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"connectVia": {
+			"referenceName": "PlatformMckinseyIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvault-48bc344.vault.azure.net/"
+		},
+		"annotations": []
+	}
+}

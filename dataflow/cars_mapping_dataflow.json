@@ -1,0 +1,45 @@
+{
+	"name": "cars_mapping_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "cars_raw_data_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "carsraw"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "cars_intermediate_data_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "intermediate"
+				},
+				{
+					"dataset": {
+						"referenceName": "cars_feature_data_parquet",
+						"type": "DatasetReference"
+					},
+					"name": "feature"
+				}
+			],
+			"transformations": [
+				{
+					"name": "fixschema"
+				},
+				{
+					"name": "generatefeatures"
+				},
+				{
+					"name": "rollups"
+				}
+			],
+			"script": "source(output(\n\t\tmake as string,\n\t\tmodel as string,\n\t\tyear as string,\n\t\tengine_fuel_type as string,\n\t\tengine_hp as string,\n\t\tengine_cylinders as string,\n\t\ttransmission_type as string,\n\t\tdriven_wheels as string,\n\t\tnumber_of_doors as string,\n\t\tmarket_category as string,\n\t\tvehicle_size as string,\n\t\tvehicle_style as string,\n\t\thighway_mpg as string,\n\t\tcity_mpg as string,\n\t\tpopularity as string,\n\t\tmsrp as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> carsraw\ncarsraw derive(msrp = toDouble(msrp),\n\t\tpopularity = toDouble(popularity),\n\t\tcity_mpg = toDouble(city_mpg),\n\t\thighway_mpg = toDouble(highway_mpg),\n\t\tnumber_of_doors = toDouble(number_of_doors),\n\t\tengine_hp = toDouble(engine_hp),\n\t\tengine_cylinders = toDouble(engine_cylinders)) ~> fixschema\nfixschema derive(avg_mpg = divide(add(city_mpg, highway_mpg), 2),\n\t\tcost_per_bhp = divide(msrp, engine_hp),\n\t\tbhp_per_cylinder = divide(engine_hp, engine_cylinders)) ~> generatefeatures\ngeneratefeatures aggregate(avg_bhp = avg(engine_hp),\n\t\tavg_msrp = avg(msrp),\n\t\toverall_average_mpg = avg(avg_mpg),\n\t\tmin_mpg = min(avg_mpg),\n\t\tmax_mpg = max(avg_mpg),\n\t\tmax_msrp = max(msrp),\n\t\tmin_msrp = min(msrp)) ~> rollups\ngeneratefeatures sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> intermediate\nrollups sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> feature"
+		}
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"name": "cars_feature_data_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Platform Mckinsey Analytics Storage 2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "cars-aggregated",
+				"fileSystem": "feature"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

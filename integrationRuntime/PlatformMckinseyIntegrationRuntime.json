@@ -1,0 +1,22 @@
+{
+	"name": "PlatformMckinseyIntegrationRuntime",
+	"properties": {
+		"type": "Managed",
+		"description": "Platform Mckinsey Managed Integration Runtime",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "East US",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 60,
+					"cleanup": true
+				}
+			}
+		},
+		"managedVirtualNetwork": {
+			"type": "ManagedVirtualNetworkReference",
+			"referenceName": "default"
+		}
+	}
+}

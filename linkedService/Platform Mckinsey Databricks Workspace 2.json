@@ -1,0 +1,29 @@
+{
+	"name": "Platform Mckinsey Databricks Workspace 2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"connectVia": {
+			"referenceName": "PlatformMckinseyIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"accessToken": {
+				"secretName": "databricks-pat-token-secret",
+				"store": {
+					"referenceName": "Platform Mckinsey Private Keyvault 2",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureKeyVaultSecret"
+			},
+			"domain": "https://adb-2366866120923589.9.azuredatabricks.net",
+			"newClusterNodeType": "Standard_D8_v3",
+			"newClusterNumOfWorker": "1:10",
+			"newClusterSparkEnvVars": {
+				"PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+			},
+			"newClusterVersion": "10.0.x-scala2.12"
+		},
+		"annotations": []
+	}
+}

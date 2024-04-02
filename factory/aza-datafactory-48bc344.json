@@ -1,0 +1,9 @@
+{
+	"name": "aza-datafactory-48bc344",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "10811a24-713c-42eb-ae14-44a48134adf5",
+		"tenantId": "b0257c14-cacc-44c6-8927-5b4ce5de0874"
+	}
+}

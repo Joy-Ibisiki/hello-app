@@ -1,0 +1,90 @@
+{
+	"name": "cars_upload_data_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Platform Mckinsey Analytics Storage 2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "cars.csv",
+				"fileSystem": "upload"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "make",
+				"type": "String"
+			},
+			{
+				"name": "model",
+				"type": "String"
+			},
+			{
+				"name": "year",
+				"type": "String"
+			},
+			{
+				"name": "engine_fuel_type",
+				"type": "String"
+			},
+			{
+				"name": "engine_hp",
+				"type": "String"
+			},
+			{
+				"name": "engine_cylinders",
+				"type": "String"
+			},
+			{
+				"name": "transmission_type",
+				"type": "String"
+			},
+			{
+				"name": "driven_wheels",
+				"type": "String"
+			},
+			{
+				"name": "number_of_doors",
+				"type": "String"
+			},
+			{
+				"name": "market_category",
+				"type": "String"
+			},
+			{
+				"name": "vehicle_size",
+				"type": "String"
+			},
+			{
+				"name": "vehicle_style",
+				"type": "String"
+			},
+			{
+				"name": "highway_mpg",
+				"type": "String"
+			},
+			{
+				"name": "city_mpg",
+				"type": "String"
+			},
+			{
+				"name": "popularity",
+				"type": "String"
+			},
+			{
+				"name": "msrp",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

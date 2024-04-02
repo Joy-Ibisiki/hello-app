@@ -1,0 +1,26 @@
+{
+	"name": "Platform Mckinsey Analytics Storage 2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"connectVia": {
+			"referenceName": "PlatformMckinseyIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		},
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://datastore48bc344.dfs.core.windows.net",
+			"servicePrincipalId": "2b15ebdb-2344-46ef-b54b-526300f23746",
+			"servicePrincipalKey": {
+				"secretName": "datafactory-spi-secret",
+				"store": {
+					"referenceName": "Platform Mckinsey Private Keyvault 2",
+					"type": "LinkedServiceReference"
+				},
+				"type": "AzureKeyVaultSecret"
+			},
+			"tenant": "b0257c14-cacc-44c6-8927-5b4ce5de0874",
+			"servicePrincipalCredentialType": "AzureKeyVaultSecret"
+		},
+		"annotations": []
+	}
+}
